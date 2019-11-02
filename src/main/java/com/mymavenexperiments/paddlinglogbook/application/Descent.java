@@ -1,8 +1,9 @@
 package com.mymavenexperiments.paddlinglogbook.application;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Descent implements Comparable<Descent>{
+public class Descent implements Comparable<Descent>, Serializable {
 
     private static int totalId = 0;
     private int id;
@@ -50,7 +51,7 @@ public class Descent implements Comparable<Descent>{
     public String getStretch() {
         return stretch;
     }
-    
+
     @Override
     public int compareTo(Descent o) {
         return this.date.compareTo(o.getDate());
