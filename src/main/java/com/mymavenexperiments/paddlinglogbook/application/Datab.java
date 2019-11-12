@@ -28,7 +28,8 @@ public class Datab {
     public void addToTable(Descent d) {
         try {
             Statement addStatement = connect.createStatement();
-            addStatement.executeUpdate("insert into discese values (" + d.getId() + ", " + d.getAvgDifficulty() + ", " + d.getDate() + ", " + d.getArea() + ", " + d.getRiver() + ", " + d.getStretch() + ");");
+            addStatement.executeUpdate("insert into DESCENTS values (" + d.getId() + ", " + d.getAvgDifficulty() + ", " + d.getDate() + ", '" + d.getArea() + "', '" + d.getRiver() + "', '" + d.getStretch() + ");");
+            addStatement.close();
         } catch (SQLException e) {
             System.out.println("Sorry, " + e);
         }
