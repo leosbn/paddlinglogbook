@@ -5,8 +5,6 @@ import java.time.LocalDate;
 
 public class Descent implements Comparable<Descent>, Serializable {
 
-    private static int totalId = 0;
-    private int id;
     private int avgDifficulty;
     private LocalDate date;
     private String area;
@@ -14,8 +12,6 @@ public class Descent implements Comparable<Descent>, Serializable {
     private String stretch;
 
     public Descent(int avgDifficulty, LocalDate date, String area, String river, String stretch) {
-        this.id = totalId + 1;
-        totalId++;
         this.avgDifficulty = avgDifficulty;
         this.date = date;
         this.area = area;
@@ -25,11 +21,7 @@ public class Descent implements Comparable<Descent>, Serializable {
 
     @Override
     public String toString() {
-        return this.id + ", " + this.avgDifficulty + ", " + this.date + ", " + this.area + ", " + this.river + ", " + this.stretch;
-    }
-
-    public int getId() {
-        return id;
+        return this.avgDifficulty + ", " + this.date + ", " + this.area + ", " + this.river + ", " + this.stretch;
     }
 
     public int getAvgDifficulty() {

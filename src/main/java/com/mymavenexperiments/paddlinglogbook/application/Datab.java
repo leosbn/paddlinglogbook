@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
-import java.io.File;
+import java.sql.Date;
 
 public class Datab {
 
@@ -26,12 +26,10 @@ public class Datab {
     }
 
     public void addToTable(Descent d) {
-        String statementIHopeWorks = "insert into DESCENTS values(" + d.getAvgDifficulty() + ", " + d.getDate() + ", '" + d.getArea() + "', '" + d.getRiver() + "', '" + d.getStretch() + "')";
-        //System.out.println("insert into DESCENTS values(" + d.getAvgDifficulty() + ", " + d.getDate() + ", '" + d.getArea() + "', '" + d.getRiver() + "', '" + d.getStretch() + "');");
+        Date convertedDate = Date.valueOf(d.getDate());
+        String statementIHopeWorks = "insert into DESCENTS values(" + d.getAvgDifficulty() + ", '" + convertedDate + "', '" + d.getArea() + "', '" + d.getRiver() + "', '" + d.getStretch() + "')";
         try {
             PreparedStatement addStatement = connect.prepareStatement(statementIHopeWorks);
-            //addStatement.executeUpdate("insert into descents values(2, 2, '15.11.2013', 'kerry', 'caragh', 'lower')");
-            //Statement add2Statement = new PreparedStatement();
             addStatement.executeUpdate();
             addStatement.close();
         } catch (SQLException e) {
