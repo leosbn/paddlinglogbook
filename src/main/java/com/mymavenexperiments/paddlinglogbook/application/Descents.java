@@ -10,12 +10,6 @@ public class Descents implements Serializable {
     private List<Descent> list;
     private Datab db;
 
-    /*
-    private final String FILENAME = "paddlinglogbook-data.dat";
-    private final String PATH = System.getProperty("user.home");
-    private File file = new File(PATH + File.separator + FILENAME);
-     */
-
     /**
      * the class manages creation and serialization of information on a local
      * file it checks for previous data in the file and loads it to the main
@@ -25,19 +19,6 @@ public class Descents implements Serializable {
         this.list = new ArrayList<>();
         this.db = new Datab();
         this.db.connect();
-        /*try {
-            ObjectInputStream input = new ObjectInputStream(new FileInputStream(file));
-            List<Descent> contents = (List<Descent>) input.readObject();
-            this.list.addAll(contents);
-            input.close();
-        } catch (IOException e) {
-            System.out.println("Sorry " + e);
-        } catch (ClassNotFoundException e) {
-            System.out.println("Sorry " + e);
-        } catch (ClassCastException e) {
-            System.out.println("Sorry " + e);
-        }
-         */
     }
 
     /**
@@ -56,7 +37,8 @@ public class Descents implements Serializable {
      * @return list of descents
      */
     public List<Descent> listAllDescents() {
-        return this.list;
+        //return this.list;
+        return this.db.listAll();
     }
 
     /**

@@ -5,6 +5,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.sql.ResultSet;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Datab {
 
@@ -35,5 +39,22 @@ public class Datab {
         } catch (SQLException e) {
             System.out.println("Sorry, " + e);
         }
+    }
+    
+    public List<Descent> listAll(){
+        List<Descent> listOfDescents = new ArrayList<>();
+        try{
+            PreparedStatement listAllStatement = connect.prepareStatement("select * from descents");
+            ResultSet rs = listAllStatement.executeQuery();
+            while(rs.next()){
+                listAllStatement.getGeneratedKeys();
+                rs.getInt(1);
+                Descent d = new Descent(rs.getInt(1), rs.getDate(2).toLocalDate(), rs.getString(3), rs.getString(4), rs.getString(5));
+                listOfDescents.add(d);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return listOfDescents;
     }
 }
