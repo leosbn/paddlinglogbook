@@ -48,7 +48,6 @@ public class Descents implements Serializable {
      * @return
      */
     public List<Descent> showAllOnRiver(String river) {
-        List<Descent> lista = new ArrayList<>();
         return this.db.listOnlyRiver(river);
     }
 
@@ -59,27 +58,13 @@ public class Descents implements Serializable {
      * @return
      */
     public List<Descent> showAllInDate(LocalDate date) {
-        List<Descent> lista = new ArrayList<>();
-        for (Descent each : this.list) {
-            if (each.getDate().equals(date)) {
-                lista.add(each);
-            }
-        }
-        return lista;
+        return this.db.listOnlyDate(date);
     }
 
     /**
      * the method serializes data to a file
      */
     public void closeAndSave() {
-        /*
-        try {
-            ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file));
-            output.writeObject(this.list);
-            output.close();
-        } catch (IOException e) {
-            System.out.println("Sorry " + e);
-        }
-         */
+        this.db.closeProgr();
     }
 }

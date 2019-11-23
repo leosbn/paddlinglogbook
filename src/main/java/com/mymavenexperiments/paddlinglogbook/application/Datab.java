@@ -94,4 +94,12 @@ public class Datab {
         }
         return listOfDescents;
     }
+
+    public void closeProgr() {
+        try {
+            connect.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
