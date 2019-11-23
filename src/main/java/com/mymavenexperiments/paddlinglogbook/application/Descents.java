@@ -49,12 +49,7 @@ public class Descents implements Serializable {
      */
     public List<Descent> showAllOnRiver(String river) {
         List<Descent> lista = new ArrayList<>();
-        for (Descent each : this.list) {
-            if (each.getRiver().equalsIgnoreCase(river)) {
-                lista.add(each);
-            }
-        }
-        return lista;
+        return this.db.listOnlyRiver(river);
     }
 
     /**

@@ -19,8 +19,8 @@ public class Datab {
     public Datab() {
         this.connect = null;
     }
-    
-    public void connect(){
+
+    public void connect() {
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
             connect = DriverManager.getConnection(host);
@@ -40,14 +40,32 @@ public class Datab {
             System.out.println("Sorry, " + e);
         }
     }
-    
-    public List<Descent> listAll(){
+
+    public List<Descent> listAll() {
         List<Descent> listOfDescents = new ArrayList<>();
-        try{
+        try {
             PreparedStatement listAllStatement = connect.prepareStatement("select * from descents");
             ResultSet rs = listAllStatement.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 listAllStatement.getGeneratedKeys();
+                rs.getInt(1);
+                Descent d = new Descent(rs.getInt(1), rs.getDate(2).toLocalDate(), rs.getString(3), rs.getString(4), rs.getString(5));
+                listOfDescents.add(d);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listOfDescents;
+    }
+
+    public List<Descent> listOnlyRiver(String river) {
+        List<Descent> listOfDescents = new ArrayList<>();
+        String statement = "select * from descents where river = '" + river + "'";
+        try {
+            PreparedStatement listOnRiverStatement = connect.prepareStatement(statement);
+            ResultSet rs = listOnRiverStatement.executeQuery();
+            while (rs.next()) {
+                listOnRiverStatement.getGeneratedKeys();
                 rs.getInt(1);
                 Descent d = new Descent(rs.getInt(1), rs.getDate(2).toLocalDate(), rs.getString(3), rs.getString(4), rs.getString(5));
                 listOfDescents.add(d);
