@@ -70,7 +70,26 @@ public class Datab {
                 Descent d = new Descent(rs.getInt(1), rs.getDate(2).toLocalDate(), rs.getString(3), rs.getString(4), rs.getString(5));
                 listOfDescents.add(d);
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listOfDescents;
+    }
+
+    public List<Descent> listOnlyDate(LocalDate date) {
+        List<Descent> listOfDescents = new ArrayList<>();
+        Date d = Date.valueOf(date);
+        String statement = "select * from descents where date = '" + d + "'";
+        try {
+            PreparedStatement listOnDateStatement = connect.prepareStatement(statement);
+            ResultSet rs = listOnDateStatement.executeQuery();
+            while (rs.next()) {
+                listOnDateStatement.getGeneratedKeys();
+                rs.getInt(1);
+                Descent de = new Descent(rs.getInt(1), rs.getDate(2).toLocalDate(), rs.getString(3), rs.getString(4), rs.getString(5));
+                listOfDescents.add(de);
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return listOfDescents;
