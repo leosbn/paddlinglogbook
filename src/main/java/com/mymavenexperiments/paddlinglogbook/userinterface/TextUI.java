@@ -2,13 +2,13 @@ package com.mymavenexperiments.paddlinglogbook.userinterface;
 
 import com.mymavenexperiments.paddlinglogbook.application.*;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.Scanner;
 
 public class TextUI {
 
     private Scanner scanner;
     private Descents descents;
+    private LocalDate dateInput;
 
     public TextUI() {
         this.scanner = new Scanner(System.in);
@@ -63,20 +63,31 @@ public class TextUI {
     public void add() {
         System.out.println("Difficoltà della discesa:");
         int avgDiff = Integer.parseInt(this.scanner.nextLine());
-        System.out.println("Data: anno");
-        int year = Integer.parseInt(this.scanner.nextLine());
-        System.out.println("Data: mese");
-        int month = Integer.parseInt(this.scanner.nextLine());
-        System.out.println("Data: giorno");
-        int day = Integer.parseInt(this.scanner.nextLine());
-        LocalDate date = LocalDate.of(year, month, day);
+        dateAcquisition();
         System.out.println("Area:");
         String area = this.scanner.nextLine();
         System.out.println("River:");
         String river = this.scanner.nextLine();
         System.out.println("Stretch:");
         String stretch = this.scanner.nextLine();
-        this.descents.addDescent(new Descent(avgDiff, date, area, river, stretch));
+        this.descents.addDescent(new Descent(avgDiff, this.dateInput, area, river, stretch));
+    }
+
+    /**
+     * this method handles the input of the date, in order to avoid repetition
+     * of code when other methods need to ask the user to input the date
+     *
+     * @return the updated date inputed by the user
+     */
+    public LocalDate dateAcquisition() {
+        System.out.println("Data: giorno");
+        int day = Integer.parseInt(this.scanner.nextLine());
+        System.out.println("Data: mese");
+        int month = Integer.parseInt(this.scanner.nextLine());
+        System.out.println("Data: anno");
+        int year = Integer.parseInt(this.scanner.nextLine());
+        this.dateInput = LocalDate.of(year, month, day);
+        return dateInput;
     }
 
     /**
@@ -101,14 +112,8 @@ public class TextUI {
      * this method shows all the descents on a given day
      */
     public void showAllInDate() {
-        System.out.println("Data: anno");
-        int year = Integer.parseInt(this.scanner.nextLine());
-        System.out.println("Data: mese");
-        int month = Integer.parseInt(this.scanner.nextLine());
-        System.out.println("Data: giorno");
-        int day = Integer.parseInt(this.scanner.nextLine());
-        LocalDate date = LocalDate.of(year, month, day);
-        System.out.println(this.descents.showAllInDate(date));
+        dateAcquisition();
+        System.out.println(this.descents.showAllInDate(dateInput));
     }
 
     /**

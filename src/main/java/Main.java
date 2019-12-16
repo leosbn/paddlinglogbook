@@ -1,8 +1,5 @@
 
-import com.mymavenexperiments.paddlinglogbook.application.*;
 import com.mymavenexperiments.paddlinglogbook.userinterface.*;
-import java.time.LocalDate;
-import java.time.Month;
 
 public class Main {
 
